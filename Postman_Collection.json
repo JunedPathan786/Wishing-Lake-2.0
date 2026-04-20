@@ -1,0 +1,223 @@
+{
+  "info": {
+    "name": "Wishing Lake API",
+    "description": "Complete API collection for Wishing Lake project",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": {"raw": "http://localhost:5000/api/auth/register", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "auth", "register"]},
+            "body": {"mode": "raw", "raw": "{\"name\":\"John Doe\",\"email\":\"john@example.com\",\"password\":\"Test123456\",\"confirmPassword\":\"Test123456\"}"}
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": {"raw": "http://localhost:5000/api/auth/login", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "auth", "login"]},
+            "body": {"mode": "raw", "raw": "{\"email\":\"john@example.com\",\"password\":\"Test123456\"}"}
+          }
+        },
+        {
+          "name": "Get Me",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": {"raw": "http://localhost:5000/api/auth/me", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "auth", "me"]}
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": {"raw": "http://localhost:5000/api/auth/logout", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "auth", "logout"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Wishes",
+      "item": [
+        {
+          "name": "Create Wish",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}, {"key": "Content-Type", "value": "application/json"}],
+            "url": {"raw": "http://localhost:5000/api/wishes", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "wishes"]},
+            "body": {"mode": "raw", "raw": "{\"title\":\"Need a Laptop\",\"description\":\"For my studies\",\"category\":\"Material\",\"budget\":50000,\"isPublic\":true}"}
+          }
+        },
+        {
+          "name": "Get All Wishes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {"raw": "http://localhost:5000/api/wishes?page=1&limit=10", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "wishes"], "query": [{"key": "page", "value": "1"}, {"key": "limit", "value": "10"}]}
+          }
+        },
+        {
+          "name": "Get My Wishes",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": {"raw": "http://localhost:5000/api/wishes/user/my-wishes", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "wishes", "user", "my-wishes"]}
+          }
+        },
+        {
+          "name": "Fulfill Wish Request",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}, {"key": "Content-Type", "value": "application/json"}],
+            "url": {"raw": "http://localhost:5000/api/wishes/{{wishId}}/fulfill-request", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "wishes", "{{wishId}}", "fulfill-request"]},
+            "body": {"mode": "raw", "raw": "{\"message\":\"I can help with this wish\"}"}
+          }
+        },
+        {
+          "name": "Like Wish",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": {"raw": "http://localhost:5000/api/wishes/{{wishId}}/like", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "wishes", "{{wishId}}", "like"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Create Razorpay Order",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}, {"key": "Content-Type", "value": "application/json"}],
+            "url": {"raw": "http://localhost:5000/api/payment/create-razorpay-order", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "payment", "create-razorpay-order"]},
+            "body": {"mode": "raw", "raw": "{\"fulfillmentRequestId\":\"{{requestId}}\",\"amount\":500,\"currency\":\"INR\"}"}
+          }
+        },
+        {
+          "name": "Verify Razorpay Payment",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}, {"key": "Content-Type", "value": "application/json"}],
+            "url": {"raw": "http://localhost:5000/api/payment/verify-razorpay", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "payment", "verify-razorpay"]},
+            "body": {"mode": "raw", "raw": "{\"razorpay_order_id\":\"order_id\",\"razorpay_payment_id\":\"payment_id\",\"razorpay_signature\":\"signature\"}"}
+          }
+        },
+        {
+          "name": "Get Payment History",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": {"raw": "http://localhost:5000/api/payment/history", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "payment", "history"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": {"raw": "http://localhost:5000/api/user/profile", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "user", "profile"]}
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}, {"key": "Content-Type", "value": "application/json"}],
+            "url": {"raw": "http://localhost:5000/api/user/profile", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "user", "profile"]},
+            "body": {"mode": "raw", "raw": "{\"name\":\"Jane Doe\",\"avatar\":\"https://example.com/avatar.jpg\"}"}
+          }
+        },
+        {
+          "name": "Get Notifications",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": {"raw": "http://localhost:5000/api/user/notifications", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "user", "notifications"]}
+          }
+        },
+        {
+          "name": "Get Fulfillment Requests",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": {"raw": "http://localhost:5000/api/user/fulfillment-requests", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "user", "fulfillment-requests"]}
+          }
+        },
+        {
+          "name": "Get User Stats",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": {"raw": "http://localhost:5000/api/user/stats", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "user", "stats"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+            "url": {"raw": "http://localhost:5000/api/admin/users?page=1&limit=20", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "admin", "users"], "query": [{"key": "page", "value": "1"}, {"key": "limit", "value": "20"}]}
+          }
+        },
+        {
+          "name": "Get All Wishes",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+            "url": {"raw": "http://localhost:5000/api/admin/wishes?page=1&limit=20", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "admin", "wishes"], "query": [{"key": "page", "value": "1"}, {"key": "limit", "value": "20"}]}
+          }
+        },
+        {
+          "name": "Get All Fulfillment Requests",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+            "url": {"raw": "http://localhost:5000/api/admin/fulfillment-requests", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "admin", "fulfillment-requests"]}
+          }
+        },
+        {
+          "name": "Approve Fulfillment Request",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+            "url": {"raw": "http://localhost:5000/api/admin/fulfillment-requests/{{requestId}}/approve", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "admin", "fulfillment-requests", "{{requestId}}", "approve"]}
+          }
+        },
+        {
+          "name": "Get Analytics",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+            "url": {"raw": "http://localhost:5000/api/admin/analytics", "protocol": "http", "host": ["localhost"], "port": ["5000"], "path": ["api", "admin", "analytics"]}
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {"key": "token", "value": "your_jwt_token_here"},
+    {"key": "adminToken", "value": "your_admin_jwt_token_here"},
+    {"key": "wishId", "value": "wish_id_here"},
+    {"key": "requestId", "value": "request_id_here"}
+  ]
+}

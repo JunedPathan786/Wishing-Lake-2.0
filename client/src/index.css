@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #020617;
+    --bg-secondary: #06102B;
+    --surface: #0F172A;
+    --gold: #FDE047;
+    --silver: #38BDF8;
+    --text-primary: #F8FAFC;
+    --text-secondary: #94A3B8;
+    --border: rgba(255, 255, 255, 0.1);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-lake-bg text-slate-100 font-body antialiased;
+    background-color: var(--bg-primary);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(253, 224, 71, 0.3);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(253, 224, 71, 0.6);
+  }
+
+  ::selection {
+    background: rgba(253, 224, 71, 0.3);
+    color: #F8FAFC;
+  }
+
+  h1, h2, h3 {
+    @apply font-heading;
+  }
+}
+
+@layer components {
+  /* ── Glass card ─────────────────────────────── */
+  .glass {
+    @apply backdrop-blur-xl bg-slate-900/60 border border-white/10 shadow-glass;
+  }
+
+  .glass-card {
+    @apply bg-slate-900/40 border border-white/5 rounded-2xl;
+    transition: border-color 0.2s ease;
+  }
+  .glass-card:hover {
+    @apply border-white/20;
+  }
+
+  /* ── Buttons ─────────────────────────────────── */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-8 py-3 rounded-full font-body font-medium text-lake-bg;
+    background: linear-gradient(135deg, #FDE047, #F59E0B);
+    transition: all 0.2s ease;
+  }
+  .btn-primary:hover {
+    @apply shadow-glow-gold scale-105;
+    background: linear-gradient(135deg, #FEF08A, #FDE047);
+  }
+  .btn-primary:active {
+    @apply scale-95;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-white/20 text-slate-300 font-body text-sm;
+    transition: all 0.2s ease;
+  }
+  .btn-ghost:hover {
+    @apply border-white/40 text-white bg-white/5;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium;
+    background: rgba(248, 113, 113, 0.15);
+    border: 1px solid rgba(248, 113, 113, 0.3);
+    color: #FCA5A5;
+    transition: all 0.2s ease;
+  }
+  .btn-danger:hover {
+    background: rgba(248, 113, 113, 0.25);
+    color: #FEE2E2;
+  }
+
+  /* ── Inputs ───────────────────────────────────── */
+  .input-field {
+    @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-500 text-sm font-body;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+  }
+  .input-field:focus {
+    border-color: rgba(253, 224, 71, 0.5);
+    box-shadow: 0 0 0 1px rgba(253, 224, 71, 0.2);
+  }
+
+  /* ── Label ────────────────────────────────────── */
+  .label {
+    @apply text-xs font-body font-medium tracking-[0.15em] uppercase text-slate-400 mb-1.5 block;
+  }
+
+  /* ── Badge ────────────────────────────────────── */
+  .badge {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-body font-medium;
+    @apply bg-white/5 border border-white/10;
+  }
+
+  /* ── Page container ───────────────────────────── */
+  .page-container {
+    @apply min-h-screen pt-20 px-4 md:px-8 lg:px-12 max-w-7xl mx-auto;
+  }
+
+  /* ── Section heading ──────────────────────────── */
+  .section-heading {
+    @apply font-heading text-4xl md:text-5xl text-white tracking-tighter;
+  }
+
+  /* ── Shimmer loading skeleton ─────────────────── */
+  .skeleton {
+    background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.07) 50%, rgba(255,255,255,0.03) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    @apply rounded-xl;
+  }
+}
+
+@layer utilities {
+  .text-gold {
+    color: var(--gold);
+  }
+
+  .text-silver {
+    color: var(--silver);
+  }
+
+  .gradient-gold {
+    background: linear-gradient(135deg, #FDE047, #F59E0B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-silver {
+    background: linear-gradient(135deg, #38BDF8, #818CF8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* ── React Hot Toast custom ──────────────────────── */
+.toast-dark {
+  background: #0F172A !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  color: #F8FAFC !important;
+  font-family: 'Outfit', sans-serif !important;
+  border-radius: 12px !important;
+}
